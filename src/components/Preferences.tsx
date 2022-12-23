@@ -1,5 +1,5 @@
 import { openCommandPreferences, ActionPanel, Action, Icon, List, Color } from '@raycast/api'
-import { paths } from '../config'
+import { paths } from 'config'
 
 const isHost = paths?.host?.trim()
 
@@ -31,7 +31,6 @@ export default function Preferences() {
             </ActionPanel>
           }
         />
-
       </List.Section>
     </List>
   )
