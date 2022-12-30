@@ -7,6 +7,6 @@ const isConfigured = paths?.host?.trim()
 export default function Command() {
   if (!isConfigured) return <Preferences />
 
-  return <Settings />
+  // return <Settings />
   return <Main />
 }

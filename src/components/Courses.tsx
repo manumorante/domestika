@@ -56,8 +56,8 @@ function Courses() {
 const CourseDetails = ({ course }: { course: courseType }) => {
   // const cover = course?.attributes?.cover?.original
   const markdown = `
-  ## ${course.attributes.title}
-  ### ${course.attributes.description}
+  # ${course.attributes.title}
+  ## ${course.attributes.description}
   `
   return <Detail markdown={markdown} />
 }

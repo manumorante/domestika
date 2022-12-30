@@ -1,4 +1,4 @@
-import { Detail } from '@raycast/api'
+import { Action, ActionPanel, Detail } from '@raycast/api'
 import { useFetch } from '@raycast/utils'
 import { paths } from 'config'
 import { resultsType } from 'types'
@@ -16,21 +16,43 @@ const Debugging = () => {
   const headers = { Accept: 'application/vnd.api+json', 'x-dmstk-accept-version': 'course.v2' }
   const { data: results } = useFetch<resultsType>(apiUrl, { headers })
 
+  if (results?.data?.length === undefined) return null
+
+  const responseString = JSON.stringify(results, undefined)
+  const course = results?.data[0]
+
   const markdown = `
-  \`\`\`
-  REQUEST
+  ### Course
+  ${course.id}
+
+  ### Request
   ${apiUrl}
   
-  RESPONSE
-  ${JSON.stringify(results, undefined)}
+  ### Response
+  \`\`\`
+  ${responseString}
   \`\`\`
   `
+
   return (
     <Detail
       markdown={markdown}
       navigationTitle='Debugging'
+      actions={
+        <ActionPanel>
+          <Action.CopyToClipboard key='1' title='Copy response' content={`${responseString}`} />
+        </ActionPanel>
+      }
       metadata={
         <Detail.Metadata>
+          <Detail.Metadata.Link
+            title='API Docs'
+            target='https://www.domestika.org/api-docs/index.html'
+            text='domestika.org/api-docs'
+          />
+
+          <Detail.Metadata.Separator />
+
           <Detail.Metadata.Label title='Host' text={paths.host} />
           <Detail.Metadata.Label title='Total items' text={`${results?.meta?.totalItems}`} />
           <Detail.Metadata.Label
@@ -47,7 +69,9 @@ const Debugging = () => {
 
           <Detail.Metadata.Separator />
 
-          <Detail.Metadata.Link title='Domestika' target='https://www.domestika.org' text='www.domestika.org' />
+          {Object.entries(course.attributes).map(([key, value]) => (
+            <Detail.Metadata.Label title={key} text={`${value}`} />
+          ))}
         </Detail.Metadata>
       }
     />

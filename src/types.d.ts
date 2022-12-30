@@ -1,4 +1,5 @@
 export type courseType = {
+  id: string
   attributes: {
     title: string
     shortDescription: string
