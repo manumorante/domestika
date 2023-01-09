@@ -8,6 +8,11 @@ const Settings = () => {
     await LocalStorage.setItem(name, value)
   }
 
+  async function getSetting({ name }: { name: string }) {
+    const item = await LocalStorage.getItem<string>(name)
+    return item
+  }
+
   return (
     <List navigationTitle='Settings'>
       {settings?.map((item) => {

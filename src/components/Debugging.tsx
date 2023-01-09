@@ -54,7 +54,7 @@ const Debugging = () => {
           <Detail.Metadata.Separator />
 
           <Detail.Metadata.Label title='Host' text={paths.host} />
-          <Detail.Metadata.Label title='Total items' text={`${results?.meta?.totalItems}`} />
+          <Detail.Metadata.Label title='Total items' text={`${results?.meta?.length}`} />
           <Detail.Metadata.Label
             title={`Page ${results?.meta?.page?.number}`}
             text={`${results?.meta?.page?.size} courses`}

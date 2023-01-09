@@ -30,7 +30,7 @@ function Courses() {
   return (
     <List>
       {results?.data && (
-        <List.Section title={`${results?.meta?.totalItems} courses`}>
+        <List.Section title={`${results?.meta?.length} courses`}>
           {results.data.map((course: courseType) => {
             return (
               <List.Item

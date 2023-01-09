@@ -12,7 +12,7 @@ export type courseType = {
 
 export type resultsType = {
   meta: {
-    totalItems: number
+    length: number
     page: {
       number: number
       size: number
